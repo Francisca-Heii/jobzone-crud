@@ -15,20 +15,21 @@
 
 <body>
     <header>
-        <nav class="nav-extended text-shadow #039be5 light-blue darken-1">
-            <div class="nav-wrapper">
-                <a href="{{ url_for('get_jobs')}}" class="brand-logo">Job Zone</a>
+        <nav>
+            <div class="nav-wrapper #039be5 light-blue darken-1">
+                <a href="{{ url_for('get_jobs')}}" class="brand-logo"><img class="img-size"
+                        src="{{url_for('static', filename='images/logo1.PNG')}}" /></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i
                             class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url_for('get_jobs')}}">Home</a></li>
                     <li><a href="#">Find Jobs</a></li>
-                    <li><a href="#">Employers</a></li>
+                    <li><a href="{{ url_for('get_employer')}}">Employers</a></li>
                     <li><a href="#">Search Candidates</a></li>
                     <li><a href="#">Support</a></li>
                     <li><a href="#">Log Out</a></li>
                     <li><a href="#">Log In</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li><a href="{{ url_for('register')}}">Register</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,15 +40,16 @@
             </li>
             <li><a href="{{ url_for('get_jobs')}}">Home</a></li>
             <li><a href="#">Find Jobs</a></li>
-            <li><a href="#">Employers</a></li>
+            <li><a href="{{ url_for('get_employer')}}">Employers</a></li>
             <li><a href="#">Search Candidates</a></li>
             <li><a href="#">Support</a></li>
             <li><a href="#">Log Out</a></li>
             <li><a href="#">Log In</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="{{ url_for('register')}}">Register</a></li>
         </ul>
+
     </header>
-    <h1>Welcome to Job Zone</h1>
+
     {% block content %}
     {% endblock %}
 
