@@ -1,3 +1,7 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
 .text-shadow {
     text-shadow: 2px 2px 2px black;
 }
@@ -9,4 +13,18 @@
 
 .flashes h4 {
     line-height: 2;
+}
+
+.menu-background {
+    rgb(9, 148, 218) !important;
+    background: linear-gradient(90deg, rgb(0, 116, 173) 0%, rgb(0, 64, 153) 100%);
+}
+
+.btnPrimary {
+    background-color: rgb(9, 148, 218);
+}
+
+.mainDiv{
+    background-color: #f5f5f5;
+    margin-top: -15px;
 }

@@ -87,8 +87,23 @@ def get_employer():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    return render_template("jobseeker/profile.html", username=username)
+        {"username": session["user"]})
+    session["role"] = "jobseeker" if username["jobseeker"] == 'true' else "employer"
+
+    # render profile page if session contains user's information
+    if session["user"]:
+        return render_template("jobseeker/profile.html", username=username["username"])
+    
+    return redirect(url_for("login"))
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookies
+    flash("You have been logged out")
+    session.pop("user")
+    session.pop("role")
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
