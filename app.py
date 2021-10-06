@@ -86,13 +86,31 @@ def get_employer():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})
-    session["role"] = "jobseeker" if username["jobseeker"] == 'true' else "employer"
+    if request.method == "POST":
+        profile = {
+            "username": session["user"],
+            "firstname": request.form.get("firstname"),
+            "lastname": request.form.get("lastname"),
+            "company": request.form.get("company"),
+            "designation": request.form.get("designation"),
+            "phone": request.form.get("phone"),
+            "address": request.form.get("address")
+        }
+        mongo.db.employer_profile.insert_one(profile)
+        profile = mongo.db.employer_profile.find_one(
+                    {"username": session["user"]})
+        return render_template(
+            "employer/profile.html", profile=profile)
 
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})
+    session["role"] = "jobseeker" if username["jobseeker"] == 'true' else "employer"
     # render profile page if session contains user's information
     if session["user"]:
-        return render_template("jobseeker/profile.html", username=username["username"])
+        profile = mongo.db.employer_profile.find_one(
+                    {"username": session["user"]})
+        return render_template(
+            "employer/profile.html", profile=profile)
     
     return redirect(url_for("login"))
 
@@ -103,6 +121,7 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     session.pop("role")
+    #session.pop("profile")
     return redirect(url_for("login"))
 
 
