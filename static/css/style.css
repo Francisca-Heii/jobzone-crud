@@ -24,7 +24,16 @@ body {
     background-color: rgb(9, 148, 218);
 }
 
-.mainDiv{
+.mainDiv {
     background-color: #f5f5f5;
     margin-top: -15px;
+}
+
+.profile-image {
+    width: 130px;
+    height: 125px;
+    border-radius: 50%;
+}
+label{
+    color: black!important;
 }

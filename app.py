@@ -3,6 +3,7 @@ from flask import (Flask, flash, render_template,
  redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.utils  import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
@@ -19,10 +20,9 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_jobs")
-def get_jobs():
-    jobs = mongo.db.jobs.find()
-    return render_template("jobs.html",jobs = jobs)
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -35,18 +35,25 @@ def register():
         if existing_user:
             flash("Username already exists")
             return redirect(url_for("register"))
-        
+        jobSeekerRole = "true" if request.form["role"] == "jobseeker" else "false"
+        employerRole = "true" if request.form["role"] == "employer" else "false"
         register = {
             "username": request.form.get("username"),
             "password": generate_password_hash(request.form.get("password")),
             "firstname": request.form.get("firstname"),
             "lastname": request.form.get("lastname"),
             "email": request.form.get("email"),
-            "jobseeker": "true" if request.form["role"] == "jobseeker" else "false",
-            "employer": "true" if request.form["role"] == "employer" else "false"
+            "jobseeker":jobSeekerRole,
+            "employer": employerRole
         }
         mongo.db.users.insert_one(register)
-        
+        profile={
+            "username": request.form.get("username"),
+            "firstname": request.form.get("firstname"),
+            "lastname": request.form.get("lastname")
+        }
+        if employerRole == "true":
+            mongo.db.employer_profile.insert_one(profile)
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username")
         flash("Registration successful")
@@ -86,29 +93,49 @@ def get_employer():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    user = mongo.db.users.find_one(
+            {"username": session["user"]})
     if request.method == "POST":
-        profile = {
-            "username": session["user"],
-            "firstname": request.form.get("firstname"),
-            "lastname": request.form.get("lastname"),
-            "company": request.form.get("company"),
-            "designation": request.form.get("designation"),
-            "phone": request.form.get("phone"),
-            "address": request.form.get("address")
-        }
-        mongo.db.employer_profile.insert_one(profile)
+        f = request.files['file']
+        if f:
+            f.save(os.path.join("static/images/", secure_filename(f.filename)))
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "company": request.form.get("company"),
+                "designation": request.form.get("designation"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address"),
+                "companydesc": request.form.get("companydesc"),
+                "imageurl": "images/"+f.filename
+            }
+        else:
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "company": request.form.get("company"),
+                "designation": request.form.get("designation"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address"),
+                "companydesc": request.form.get("companydesc"),
+            }
+        mongo.db.employer_profile.update_one({"username":session["user"]},{"$set":profile})
+        # mongo.db.employer_profile.insert_one(profile)
         profile = mongo.db.employer_profile.find_one(
                     {"username": session["user"]})
+        profile["email"] = user["email"]
+        flash("Profile updated successfully")
         return render_template(
             "employer/profile.html", profile=profile)
 
-    username = mongo.db.users.find_one(
-            {"username": session["user"]})
-    session["role"] = "jobseeker" if username["jobseeker"] == 'true' else "employer"
+    session["role"] = "jobseeker" if user["jobseeker"] == 'true' else "employer"
     # render profile page if session contains user's information
     if session["user"]:
         profile = mongo.db.employer_profile.find_one(
                     {"username": session["user"]})
+        profile["email"] = user["email"]
         return render_template(
             "employer/profile.html", profile=profile)
     
