@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="card" style="height: 500px;margin-left: 18rem;margin-right: 18rem;margin-top: 6rem;">
+        <div class="card-content">
+
+            <span class="card-title activator grey-text text-darken-4" style="text-align:center!important">
+
+                <i class="fas fa-pencil right"></i></span>
+            <div class="row">
+                <div class="input-field col s12" style="text-align: center;">
+                    <img class="profile-image" src="{{url_for('static', filename=profile.imageurl)}}"
+                        onerror="this.src='{{url_for('static', filename='images/image-icon.jpg')}}'" />
+                </div>
+            </div>
+            <div class="row joseeker-profile-row">
+                <div class="input-field col s12" style="text-align: center;margin-top: -30px;">
+                    <span>{{profile.firstname}}&nbsp;{{profile.lastname}}</span>
+                </div>
+            </div>
+            <div class="row joseeker-profile-row">
+                <div class="input-field col s6">
+
+                    <label for="firstname">Email:&nbsp; {{profile.email}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <label for="firstname">Username:&nbsp;{{ profile.username}}</label>
+                </div>
+            </div>
+            <div class="row joseeker-profile-row">
+                <div class="input-field col s12">
+                    <label for="firstname">Profile Description:&nbsp;
+                        {% if profile.description %}
+                        <span>{{ profile.description}}</span>
+                        {% else %}
+                        <i>profile description here</i>
+                        {% endif %}
+                    </label>
+                </div>
+
+            </div>
+            <div class="row joseeker-profile-row">
+                <div class="input-field col s12">
+                    <label for="skills">Skills: &nbsp;
+                        {% if profile.skills %}
+                        <span>{{ profile.skills}}</span>
+                        {% else %}
+                        <i>skills here...</i>
+                        {% endif %}
+                    </label>
+                </div>
+            </div>
+            <div class="row joseeker-profile-row">
+                <div class="input-field col s12">
+                    <label for="resume">Resume :&nbsp;
+                        {% if profile.resumeurl %}
+                        <span>{{ profile.resumeurl}}</span>
+                        {% else %}
+                        <i>no resume added..</i>
+                        {% endif %}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <label for="address">Address:&nbsp;
+                        <span>{% if profile.address %}</span>
+                        {{ profile.address}}
+                        {% else %}
+                        <i>address here</i>
+                        {% endif %}
+
+                    </label>
+                </div>
+                <div class="input-field col s6">
+                    <label for="phone"> <span>phone:&nbsp; </span> {% if profile.phone %}
+                        <span>{{ profile.phone}}</span> {% else %} <i>phone</i>
+                        {% endif %}
+                    </label>
+                </div>
+            </div>
+
+            <!-- <p><a href="#">This is a link</a></p> -->
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Edit Profile<i class="fas fa-close right"></i></span>
+            <!-- <p>Here is some more information about this product that is only revealed once clicked on.</p> -->
+            <div class="row">
+                <div class="file-field input-field" style="text-align: center;">
+                    <img class="profile-image" src="{{url_for('static', filename=profile.imageurl)}}"
+                        onerror="this.src='{{url_for('static', filename='images/image-icon.jpg')}}'" / />
+                </div>
+                <form class="col s12 m12" method="POST" action="{{url_for('jobSeekerProfile',username=session['user'])}}"
+                    enctype="multipart/form-data">
+                    <!-- <div class="card-panel"> -->
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Select Image</span>
+                                <input type="file" name="imageFile">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="fas fa-user-tie prefix light-blue-text text-darken-4"></i>
+                            <input id="firstname" name="firstname" type="text" class="validate"
+                                value="{{profile.firstname}}">
+                            <label for="firstname">Firstname</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="fas fa-user prefix light-blue-text text-darken-4"></i>
+                            <input id="lastname" name="lastname" type="text" class="validate"
+                                value="{{profile.lastname}}">
+                            <label for="lastname">Lastname</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="input-field col s12">
+                            <i class="fas fa-building prefix light-blue-text text-darken-4"></i>
+                            <textarea id="profiledesc" name="profiledesc"
+                                class="validate materialize-textarea">{{profile.profiledesc}}</textarea>
+                            <label for="profiledesc">Profile description</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="fas fa-user-lock prefix light-blue-text text-darken-4"></i>
+                            <input id="skills" name="skills" type="text" class="validate"
+                                value="{{profile.skills}}">
+                            <label for="skills">Skills</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Select Resume</span>
+                                <input type="file" name="resumeDoc">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="fas fa-address-card prefix light-blue-text text-darken-4"></i>
+                            <input id="address" name="address" type="text" class="validate" value="{{profile.address}}">
+                            <label for="address">Address</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                            <input id="phone" name="phone" type="text" class="validate" value="{{profile.phone}}">
+                            <label for="phone">Phone</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" class="col s12 btn-large btnPrimary text-shadow">
+                            Update Profile <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

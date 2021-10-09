@@ -55,10 +55,6 @@ a {
     cursor: pointer
 }
 
-/* table{
-    table-layout: fixed;
-} */
-/* th td{
-    height:20px;
-    overflow: hidden;
-} */
+.joseeker-profile-row{
+    margin-bottom: 0px;
+}

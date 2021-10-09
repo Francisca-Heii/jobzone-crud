@@ -71,24 +71,23 @@ def login():
             # ensure hashed password matches user imput
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username")
+                session["user"] = request.form.get("username").lower()
+                if existing_user["employer"] == "true":
+                    session["role"] = "employer"
                     return redirect(url_for("profile", username=session["user"]))
+                else:
+                    session["role"] = "jobseeker"
+                    return redirect(url_for("jobSeekerProfile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
-        
         else:
             #username doesn't exists
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
     return render_template("login.html")
-
-@app.route("/get_employer")
-def get_employer():
-    #employer = mongo.db.employer.find()
-    return render_template("employer.html") 
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -138,7 +137,81 @@ def profile(username):
         profile["email"] = user["email"]
         return render_template(
             "employer/profile.html", profile=profile)
-    
+    return redirect(url_for("login"))
+
+
+@app.route("/jobSeekerProfile/<username>", methods=["GET", "POST"])
+def jobSeekerProfile(username):
+    user = mongo.db.users.find_one(
+            {"username": session["user"]})
+    if request.method == "POST":
+        imageFile = request.files['imageFile']
+        resumeDoc = request.files['resumeDoc']
+        if imageFile and resumeDoc:
+            imageFile.save(os.path.join("static/images/", secure_filename(imageFile.filename)))
+            resumeDoc.save(os.path.join("static/resume/", secure_filename(resumeDoc.filename)))
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "profiledesc": request.form.get("profiledesc"),
+                "skills": request.form.get("skills"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address"),
+                "imageurl": "images/"+imageFile.filename,
+                "resumeurl": "resume/"+resumeDoc.filename
+            }
+        elif imageFile:
+            imageFile.save(os.path.join("static/images/", secure_filename(imageFile.filename)))
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "profiledesc": request.form.get("profiledesc"),
+                "skills": request.form.get("skills"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address"),
+                "imageurl": "images/"+imageFile.filename
+            }
+        elif resumeDoc:
+            resumeDoc.save(os.path.join("static/resume/", secure_filename(resumeDoc.filename)))
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "profiledesc": request.form.get("profiledesc"),
+                "skills": request.form.get("skills"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address"),
+                "resumeurl": "resume/"+resumeDoc.filename
+            }
+        else:
+            profile = {
+                "username": session["user"],
+                "firstname": request.form.get("firstname"),
+                "lastname": request.form.get("lastname"),
+                "profiledesc": request.form.get("profiledesc"),
+                "skills": request.form.get("skills"),
+                "phone": request.form.get("phone"),
+                "address": request.form.get("address")
+            }
+        existing_profile = mongo.db.job_seeker_profile.find_one({"username":session["user"]})
+        if existing_profile:
+            mongo.db.job_seeker_profile.update_one({"username":session["user"]},{"$set":profile})
+        else:
+            mongo.db.job_seeker_profile.insert_one(profile)
+        profile = mongo.db.job_seeker_profile.find_one(
+                    {"username": session["user"]})
+        # profile["email"] = user["email"]
+        flash("Profile updated successfully")
+        return render_template(
+            "jobseeker/profile.html", profile=profile)
+    # render profile page if session contains user's information
+    if session["user"]:
+        profile = mongo.db.job_seeker_profile.find_one(
+                    {"username": session["user"]})
+        return render_template(
+            "jobseeker/profile.html", profile=profile)
     return redirect(url_for("login"))
 
 
