@@ -34,6 +34,31 @@ body {
     height: 125px;
     border-radius: 50%;
 }
-label{
-    color: black!important;
+
+label {
+    color: black !important;
 }
+
+.edit {
+    color: #FFC107;
+    cursor: pointer
+}
+
+.delete {
+    color: #E34724;
+    cursor: pointer
+}
+.update{
+    color:green;
+}
+a {
+    cursor: pointer
+}
+
+/* table{
+    table-layout: fixed;
+} */
+/* th td{
+    height:20px;
+    overflow: hidden;
+} */

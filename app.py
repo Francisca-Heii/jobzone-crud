@@ -173,6 +173,38 @@ def postJob():
     return render_template("employer/postJob.html")
 
 
+@app.route("/jobs", methods=["GET", "POST"])
+def jobs():
+    jobs = mongo.db.jobs.find()
+    return render_template("employer/jobs.html", jobs=jobs)
+
+
+@app.route("/ajax_update", methods=["POST","GET"])
+def ajax_update():
+    if request.method == 'POST':
+        job = {
+                "title": request.form['txtTitle'],
+                "description": request.form['txtDescription'],
+                "skills": request.form['txtSkills'],
+                "location": request.form['txtLocation'],
+                "salary": request.form['txtSalary']
+            }
+        mongo.db.jobs.update_one({"_id": ObjectId(request.form['id'])}, {"$set":job})
+        jobs = mongo.db.jobs.find()
+        return "job updated successfully"
+    jobs = mongo.db.jobs.find()
+    return render_template("employer/jobs.html", jobs=jobs)
+
+
+@app.route("/ajax_delete", methods=["POST", "GET"])
+def ajax_delete():
+    if request.method == 'POST':
+        mongo.db.jobs.delete_one({"_id": ObjectId(request.form['id'])})
+        return "Deleted Successfully"
+    jobs = mongo.db.jobs.find()
+    return render_template("employer/jobs.html", jobs=jobs)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
