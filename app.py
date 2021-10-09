@@ -152,6 +152,27 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/postJob", methods=["GET", "POST"])
+def postJob():
+    if request.method == "POST":
+        job = {
+                "username": session["user"],
+                "title": request.form.get("title"),
+                "description": request.form.get("description"),
+                "skills": request.form.get("skills"),
+                "location": request.form.get("location"),
+                "salary": request.form.get("salary")
+            }
+        mongo.db.jobs.insert_one(job)
+        flash("New Job created successfully")
+        # mongo.db.employer_profile.insert_one(profile)
+        savedJob = mongo.db.jobs.find_one(
+                    {"username": session["user"]})
+        return render_template(
+            "employer/postJob.html", savedJob=savedJob)
+    return render_template("employer/postJob.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
