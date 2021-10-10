@@ -1,0 +1,25 @@
+<h5>{{numrows}} Jobs found</h3>
+    {% for row in jobs %}
+    <div class="row jobsearch-div">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 jobsearch-td">
+                    <b>Title: &nbsp; {{row.title}}</b>
+                </div>
+                <div class="col-md-6 jobsearch-td">
+                    <b>Companyname:&nbsp; {{row.company}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 jobsearch-td">
+                    <b>Description:&nbsp; {{row.description}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 jobsearch-td">
+                    <b>Skills:&nbsp; {{row.skills}}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}

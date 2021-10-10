@@ -58,3 +58,13 @@ a {
 .joseeker-profile-row{
     margin-bottom: 0px;
 }
+.jobsearch-div{
+    border: 1px solid;
+    background-color: lightgray;
+    border-color: green;
+    border-radius: 2px;
+}
+.jobsearch-td{
+    padding-left: 6px;
+    padding-top: 6px;
+}

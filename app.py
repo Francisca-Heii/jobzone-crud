@@ -1,6 +1,6 @@
 import os
 from flask import (Flask, flash, render_template,
- redirect, request, session, url_for)
+ redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.utils  import secure_filename
@@ -52,12 +52,17 @@ def register():
             "firstname": request.form.get("firstname"),
             "lastname": request.form.get("lastname")
         }
-        if employerRole == "true":
-            mongo.db.employer_profile.insert_one(profile)
-        # put the new user into 'session' cookie
         session["user"] = request.form.get("username")
+        if employerRole == "true":
+            session["role"] = "employer"
+            mongo.db.employer_profile.insert_one(profile)
+            return redirect(url_for("profile", username=session["user"]))
+        else:
+            session["role"] = "jobseeker"
+            mongo.db.job_seeker_profile.insert_one(profile)
+            return redirect(url_for("jobSeekerProfile", username=session["user"]))
+        # put the new user into 'session' cookie
         flash("Registration successful")
-        return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
 
@@ -134,7 +139,6 @@ def profile(username):
     if session["user"]:
         profile = mongo.db.employer_profile.find_one(
                     {"username": session["user"]})
-        profile["email"] = user["email"]
         return render_template(
             "employer/profile.html", profile=profile)
     return redirect(url_for("login"))
@@ -228,13 +232,16 @@ def logout():
 @app.route("/postJob", methods=["GET", "POST"])
 def postJob():
     if request.method == "POST":
+        company = mongo.db.employer_profile.find_one(
+                    {"username": session["user"]})["company"]
         job = {
                 "username": session["user"],
                 "title": request.form.get("title"),
                 "description": request.form.get("description"),
                 "skills": request.form.get("skills"),
                 "location": request.form.get("location"),
-                "salary": request.form.get("salary")
+                "salary": request.form.get("salary"),
+                "company": company
             }
         mongo.db.jobs.insert_one(job)
         flash("New Job created successfully")
@@ -250,6 +257,29 @@ def postJob():
 def jobs():
     jobs = mongo.db.jobs.find()
     return render_template("employer/jobs.html", jobs=jobs)
+
+
+@app.route("/search/<keywords>", methods=["GET"])
+def search(keywords):
+    if keywords == '0':
+        return render_template("searchJobs.html")
+    elif keywords == '1':
+        jobs = mongo.db.jobs.find()
+        numrows=jobs.count()
+        return jsonify({'htmlresponse': render_template('response.html', jobs=jobs, numrows=numrows)})
+    else:
+        keywordArray = keywords.strip().split(",")
+        jobs = mongo.db.jobs.find(
+            {"$or":[
+                    {"title": {"$in": keywordArray}},
+                    {"skills": {"$in": keywordArray}},
+                    {"company":{"$in": keywordArray}},
+                    {"location":{"$in": keywordArray}}
+                ]}
+        )
+        numrows=jobs.count()
+        return jsonify({'htmlresponse': render_template('response.html', jobs=jobs, numrows=numrows)})
+    return render_template("searchJobs.html")
 
 
 @app.route("/ajax_update", methods=["POST","GET"])
