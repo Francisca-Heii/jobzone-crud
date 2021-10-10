@@ -48,23 +48,35 @@ label {
     color: #E34724;
     cursor: pointer
 }
-.update{
-    color:green;
+
+.update {
+    color: green;
 }
+
 a {
     cursor: pointer
 }
 
-.joseeker-profile-row{
+.joseeker-profile-row {
     margin-bottom: 0px;
 }
-.jobsearch-div{
+
+.jobsearch-div {
     border: 1px solid;
     background-color: lightgray;
     border-color: green;
     border-radius: 2px;
 }
-.jobsearch-td{
+
+.jobsearch-td {
     padding-left: 6px;
     padding-top: 6px;
+}
+
+.homepage {
+    background-image: url('../images/homepage.jpg')
+}
+
+.navbarFont{
+   font-weight: bold
 }

@@ -100,31 +100,17 @@ def profile(username):
     user = mongo.db.users.find_one(
             {"username": session["user"]})
     if request.method == "POST":
-        f = request.files['file']
-        if f:
-            f.save(os.path.join("static/images/", secure_filename(f.filename)))
-            profile = {
-                "username": session["user"],
-                "firstname": request.form.get("firstname"),
-                "lastname": request.form.get("lastname"),
-                "company": request.form.get("company"),
-                "designation": request.form.get("designation"),
-                "phone": request.form.get("phone"),
-                "address": request.form.get("address"),
-                "companydesc": request.form.get("companydesc"),
-                "imageurl": "images/"+f.filename
-            }
-        else:
-            profile = {
-                "username": session["user"],
-                "firstname": request.form.get("firstname"),
-                "lastname": request.form.get("lastname"),
-                "company": request.form.get("company"),
-                "designation": request.form.get("designation"),
-                "phone": request.form.get("phone"),
-                "address": request.form.get("address"),
-                "companydesc": request.form.get("companydesc"),
-            }
+        profile = {
+            "username": session["user"],
+            "firstname": request.form.get("firstname"),
+            "lastname": request.form.get("lastname"),
+            "company": request.form.get("company"),
+            "designation": request.form.get("designation"),
+            "phone": request.form.get("phone"),
+            "address": request.form.get("address"),
+            "companydesc": request.form.get("companydesc"),
+            "imageurl": request.form.get("file")
+        }
         mongo.db.employer_profile.update_one({"username":session["user"]},{"$set":profile})
         # mongo.db.employer_profile.insert_one(profile)
         profile = mongo.db.employer_profile.find_one(
@@ -149,12 +135,7 @@ def jobSeekerProfile(username):
     user = mongo.db.users.find_one(
             {"username": session["user"]})
     if request.method == "POST":
-        imageFile = request.files['imageFile']
-        resumeDoc = request.files['resumeDoc']
-        if imageFile and resumeDoc:
-            imageFile.save(os.path.join("static/images/", secure_filename(imageFile.filename)))
-            resumeDoc.save(os.path.join("static/resume/", secure_filename(resumeDoc.filename)))
-            profile = {
+        profile = {
                 "username": session["user"],
                 "firstname": request.form.get("firstname"),
                 "lastname": request.form.get("lastname"),
@@ -162,42 +143,8 @@ def jobSeekerProfile(username):
                 "skills": request.form.get("skills"),
                 "phone": request.form.get("phone"),
                 "address": request.form.get("address"),
-                "imageurl": "images/"+imageFile.filename,
-                "resumeurl": "resume/"+resumeDoc.filename
-            }
-        elif imageFile:
-            imageFile.save(os.path.join("static/images/", secure_filename(imageFile.filename)))
-            profile = {
-                "username": session["user"],
-                "firstname": request.form.get("firstname"),
-                "lastname": request.form.get("lastname"),
-                "profiledesc": request.form.get("profiledesc"),
-                "skills": request.form.get("skills"),
-                "phone": request.form.get("phone"),
-                "address": request.form.get("address"),
-                "imageurl": "images/"+imageFile.filename
-            }
-        elif resumeDoc:
-            resumeDoc.save(os.path.join("static/resume/", secure_filename(resumeDoc.filename)))
-            profile = {
-                "username": session["user"],
-                "firstname": request.form.get("firstname"),
-                "lastname": request.form.get("lastname"),
-                "profiledesc": request.form.get("profiledesc"),
-                "skills": request.form.get("skills"),
-                "phone": request.form.get("phone"),
-                "address": request.form.get("address"),
-                "resumeurl": "resume/"+resumeDoc.filename
-            }
-        else:
-            profile = {
-                "username": session["user"],
-                "firstname": request.form.get("firstname"),
-                "lastname": request.form.get("lastname"),
-                "profiledesc": request.form.get("profiledesc"),
-                "skills": request.form.get("skills"),
-                "phone": request.form.get("phone"),
-                "address": request.form.get("address")
+                "imageurl": request.form.get("imageFile"),
+                "resumeurl": request.form.get("resumeurl")
             }
         existing_profile = mongo.db.job_seeker_profile.find_one({"username":session["user"]})
         if existing_profile:
@@ -232,30 +179,34 @@ def logout():
 @app.route("/postJob", methods=["GET", "POST"])
 def postJob():
     if request.method == "POST":
-        company = mongo.db.employer_profile.find_one(
-                    {"username": session["user"]})["company"]
-        job = {
-                "username": session["user"],
-                "title": request.form.get("title"),
-                "description": request.form.get("description"),
-                "skills": request.form.get("skills"),
-                "location": request.form.get("location"),
-                "salary": request.form.get("salary"),
-                "company": company
-            }
-        mongo.db.jobs.insert_one(job)
-        flash("New Job created successfully")
-        # mongo.db.employer_profile.insert_one(profile)
-        savedJob = mongo.db.jobs.find_one(
+        profile = mongo.db.employer_profile.find_one(
                     {"username": session["user"]})
-        return render_template(
-            "employer/postJob.html", savedJob=savedJob)
+        if profile.get("company") and profile.get("companydesc") and profile.get("phone") and profile.get("address"):
+            job = {
+                    "username": session["user"],
+                    "title": request.form.get("title"),
+                    "description": request.form.get("description"),
+                    "skills": request.form.get("skills"),
+                    "location": request.form.get("location"),
+                    "salary": request.form.get("salary"),
+                    "company": profile["company"]
+                }
+            mongo.db.jobs.insert_one(job)
+            flash("New Job created successfully")
+            # mongo.db.employer_profile.insert_one(profile)
+            savedJob = mongo.db.jobs.find_one(
+                        {"username": session["user"]})
+            return render_template(
+                "employer/postJob.html", savedJob=savedJob)
+        else:
+            flash("Please update profile first")
+            return render_template("employer/postJob.html")
     return render_template("employer/postJob.html")
 
 
 @app.route("/jobs", methods=["GET", "POST"])
 def jobs():
-    jobs = mongo.db.jobs.find()
+    jobs = mongo.db.jobs.find({"username":session["user"]})
     return render_template("employer/jobs.html", jobs=jobs)
 
 
