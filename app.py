@@ -282,6 +282,24 @@ def search(keywords):
     return render_template("searchJobs.html")
 
 
+@app.route("/applyJob", methods=["POST", "GET"])
+def applyJob():
+    if request.method == 'POST':
+        jobApplied = {
+                "jobId": ObjectId(request.form['id']),
+                "username": session["user"]
+            }
+        existingApplication = mongo.db.jobs_history.find_one(
+            {"jobId": ObjectId(request.form['id']), "username": session["user"]})
+        if existingApplication:
+            return "Job Already Applied"
+        else:
+            mongo.db.jobs_history.insert(jobApplied)
+            return "Job Applied Successfully"
+    jobs = mongo.db.jobs.find()
+    return render_template("employer/jobs.html", jobs=jobs)
+
+
 @app.route("/ajax_update", methods=["POST","GET"])
 def ajax_update():
     if request.method == 'POST':

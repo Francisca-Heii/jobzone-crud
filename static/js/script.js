@@ -81,5 +81,6 @@ function load_data(query)
       load_data('1');
    }
   });
-  
+
+
 });
