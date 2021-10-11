@@ -61,5 +61,23 @@ All the wirframes are designed to display on different screen sizes, laptop/comp
 * [Ipad]
 * [Desktop](wireframes/wireframes_desktop.pdf)
 
+### *DESIGN*
 
+#### *Color Scheme*
+* The colors used throughout the website are:
+
+The navigation bar and the icons used on profile pages has a blue rgb (0,64,153) color with a gradient  dark blue background on menu items.
+The home page contains a blue banner with a rainbow parachuete and white clouds. A rgb(9,148,218) color with hoover effect is used on the buttons. #F5F5F5 is used as a background color. A #b3e5fc is applied on flash messages. A grey color is used on the table for search jobs to make the the jo search stand out.
+
+#### *Typography*
+The project uses Open Sans font on its own through out the site. "Montserrat" is used as a fallback font, in cases where Open Sans for some reasons fails to load. This means Montserrat will load in order to back up the failed font. I like the Open Sans font as I find it elegant, sophisticated, yet modern. It is beautifully legible and offers an excllenexcellent reading experience. 
+
+#### *Logo*
+
+
+## *FEATURES*
+#### Existing Features
+
+
+#### Features Left To Implement
 
