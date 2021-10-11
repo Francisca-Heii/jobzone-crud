@@ -1,5 +1,6 @@
 # *JobZone*
-JobZone is a website that aims to play a role in bridging the gap between the recruiters and the job seekers. The key targeted user is the recruiter and the job seeker. Recruiters can advertise their job vacancies to job seekers. Job seekers can use the site to search for new job opportunities in their area and profession.
+JobZone is a website that aims to play a role in bridging the gap between the recruiters and the job seekers. The key targeted user is the recruiter and the job seeker. Recruiters can advertise their job vacancies to job seekers,look for a right candidate who has the right qualification to handle the responsibilities efficiently. On the other hand, job seekers can search/find a job where they can apply their skills and knowledge to grow their professional career.
+Job
 ***
 
 ## *Table of contents*
@@ -7,16 +8,19 @@ JobZone is a website that aims to play a role in bridging the gap between the re
 * [User Experience](#user-experience)
     * [Project goals](#project-goals)
 
-
-
 ## *What does it do and what does it need to fulfill?*
-This milestone project is to demonstrate my development expertise aquired in the Backend Development module of the Full Stack Course, Python Fundamentals, Practical Python and Data Centric Development, to create a fully responsive CRUD web application. This Application will allow a user to create, read, update and delete relevant record.
+This milestone project is to demonstrate my knowdlge and skills aquired in the Backend Development module. The main modules include Python Fundamentals, Practical Python and Data Centric Development. Then put all the concepts together to create a fully responsive CRUD web application. This Application will allow a user to create, read, update and delete relevant data when interacting with the Job Zone Application.
+
+### *Functionality of the project*
+This application demonstrate the key CRUD requirement functionality, uses a data handling document based database, MongoDB. The user functionality is created using Flask, HTML templates and CSS. A modern front-end framework called Materializecss (similar to Bootsrap) was used in building a beautiful and responsive frontend interface, to promote ease of use and intuition when interacting with app.
+
+The application has a Registration and Login system to show clear seperation between documents created by each Registered user. These functions utilise creating, updating and reading to the database along with password hashing to protect each individuals credentials.The user has to be registered if they want to use the site.
 
 ## *User Experience*
 
 ### Project goals
-
-The purpose of the project aims to play a role in bridging the gap between the recruiters and the job seekers. The site give employers access to a list of candidates with the required skills, achievements, and experience to select from. 
+The goal is to help both organizations and job seekers to connect and grow together. To help
+ employers speed up their hiring process. It would be easier for hiring managers to check job applications online than manually scan printed resumes. The site give employers access to a list of candidates with the required skills, achievements, and experience to select from. This helps them save time, effort and is cost effective for both the employer and jobseekers.
 
 ### User Stories
 _Generic (Guest/Public) User:_
