@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s6" style="margin-top:50px!important">
                     <label for="address">Address:&nbsp;
                         <span>{% if profile.address %}</span>
                         {{ profile.address}}
@@ -72,7 +72,7 @@
 
                     </label>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col s6" style="margin-top:50px!important">
                     <label for="phone"> <span>phone:&nbsp; </span> {% if profile.phone %}
                         <span>{{ profile.phone}}</span> {% else %} <i>phone</i>
                         {% endif %}
@@ -90,8 +90,8 @@
                     <img class="profile-image" src="{{profile.imageurl}}"
                         onerror="this.src='{{url_for('static', filename='images/image-icon.jpg')}}'" / />
                 </div>
-                <form class="col s12 m12" method="POST" action="{{url_for('jobSeekerProfile',username=session['user'])}}"
-                    enctype="multipart/form-data">
+                <form class="col s12 m12" method="POST"
+                    action="{{url_for('jobSeekerProfile',username=session['user'])}}" enctype="multipart/form-data">
                     <!-- <div class="card-panel"> -->
                     <div class="row">
                         <!-- <div class="file-field input-field">
@@ -104,7 +104,7 @@
                             </div>
                         </div> -->
                         <div class="input-field col s12">
-                        <i class="fas fa-file-image prefix light-blue-text text-darken-4"></i>
+                            <i class="fas fa-file-image prefix light-blue-text text-darken-4"></i>
                             <input id="imageFile" name="imageFile" type="text" class="validate"
                                 value="{{profile.imageurl}}">
                             <label for="imageFile">Image File Url</label>
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        
+
                         <div class="input-field col s12">
                             <i class="fas fa-building prefix light-blue-text text-darken-4"></i>
                             <textarea id="profiledesc" name="profiledesc"
@@ -136,18 +136,17 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="fas fa-user-lock prefix light-blue-text text-darken-4"></i>
-                            <input id="skills" name="skills" type="text" class="validate"
-                                value="{{profile.skills}}">
+                            <input id="skills" name="skills" type="text" class="validate" value="{{profile.skills}}">
                             <label for="skills">Skills</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="fas fa-file prefix light-blue-text text-darken-4"></i>
-                                <input id="resumeurl" name="resumeurl" type="text" class="validate"
-                                    value="{{profile.resumeurl}}">
-                                <label for="resumeurl">Resume Url</label>
-                            </div>
+                            <input id="resumeurl" name="resumeurl" type="text" class="validate"
+                                value="{{profile.resumeurl}}">
+                            <label for="resumeurl">Resume Url</label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
