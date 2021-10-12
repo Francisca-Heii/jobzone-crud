@@ -3,7 +3,7 @@ from flask import (Flask, flash, render_template,
  redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from werkzeug.utils  import secure_filename
+#from werkzeug.utils  import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
@@ -23,6 +23,16 @@ mongo = PyMongo(app)
 @app.route("/home")
 def home():
     return render_template("home.html")
+
+
+@app.route("/employerHome")
+def employerHome():
+    return render_template("employer/home.html")
+
+
+@app.route("/jobSeekerHome")
+def jobSeekerHome():
+    return render_template("jobseeker/home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -249,6 +259,23 @@ def applyJob():
             return "Job Applied Successfully"
     jobs = mongo.db.jobs.find()
     return render_template("employer/jobs.html", jobs=jobs)
+
+
+@app.route("/jobApplicants", methods=["GET", "POST"])
+def jobApplicants():
+    jobs = mongo.db.jobs.find({"username": session["user"]})
+    applicants = []
+    applicantsDetails = []
+    
+    for job in jobs:
+        applicants.append(mongo.db.jobs_history.find(
+                            {"jobId": job["_id"]}))
+    appl = list(dict.fromkeys(applicants))
+    for a in appl:
+        for d in a:
+            applicantsDetails.append(mongo.db.job_seeker_profile.find_one(
+                                 {"username": d["username"]}))
+    return render_template("employer/jobApplicants.html", applicantsDetails=applicantsDetails)
 
 
 @app.route("/ajax_update", methods=["POST","GET"])
