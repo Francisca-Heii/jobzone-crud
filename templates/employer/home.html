@@ -36,7 +36,7 @@
                    update it if requirement changes and delete it if closed</p>
             </div>
             <div class="card-action">
-                <a href="{{ url_for('profile', username=session['user'])}}">BROWSE</a>
+                <a href="{{ url_for('jobs')}}">BROWSE</a>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
                 <p>Goto Job Applicants section to see the candidates details who applied your jobs.<br></p>
               </div>
               <div class="card-action black-text">
-                  <a href="{{ url_for('profile', username=session['user'])}}">BROWSE </a>
+                  <a href="{{ url_for('jobApplicants')}}">BROWSE </a>
               </div>
             </div>
           </div>

@@ -19,6 +19,10 @@ app.secret_key =os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("error.html")
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -27,12 +31,18 @@ def home():
 
 @app.route("/employerHome")
 def employerHome():
-    return render_template("employer/home.html")
+    if isValid("employer"):
+        return render_template("employer/home.html")
+    else:
+        return render_template("error.html")
 
 
 @app.route("/jobSeekerHome")
 def jobSeekerHome():
-    return render_template("jobseeker/home.html")
+    if isValid("jobseeker"):
+        return render_template("jobseeker/home.html")
+    else:
+        return render_template("error.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -216,8 +226,10 @@ def postJob():
 
 @app.route("/jobs", methods=["GET", "POST"])
 def jobs():
-    jobs = mongo.db.jobs.find({"username":session["user"]})
-    return render_template("employer/jobs.html", jobs=jobs)
+    if isValid("employer"):
+        jobs = mongo.db.jobs.find({"username":session["user"]})
+        return render_template("employer/jobs.html", jobs=jobs)
+    return render_template("error.html")
 
 
 @app.route("/search/<keywords>", methods=["GET"])
@@ -263,45 +275,64 @@ def applyJob():
 
 @app.route("/jobApplicants", methods=["GET", "POST"])
 def jobApplicants():
-    jobs = mongo.db.jobs.find({"username": session["user"]})
-    applicants = []
-    applicantsDetails = []
-    
-    for job in jobs:
-        applicants.append(mongo.db.jobs_history.find(
-                            {"jobId": job["_id"]}))
-    appl = list(dict.fromkeys(applicants))
-    for a in appl:
-        for d in a:
-            applicantsDetails.append(mongo.db.job_seeker_profile.find_one(
-                                 {"username": d["username"]}))
-    return render_template("employer/jobApplicants.html", applicantsDetails=applicantsDetails)
+    if isValid("employer"):
+        jobs = mongo.db.jobs.find({"username": session["user"]})
+        applicants = []
+        applicantsDetails = []
+
+        for job in jobs:
+            applicants.append(mongo.db.jobs_history.find(
+                                {"jobId": job["_id"]}))
+        appl = list(dict.fromkeys(applicants))
+        for a in appl:
+            for d in a:
+                applicantsDetails.append(mongo.db.job_seeker_profile.find_one(
+                                     {"username": d["username"]}))
+        return render_template("employer/jobApplicants.html", applicantsDetails=applicantsDetails)
+    else:
+        return render_template("error.html")
 
 
 @app.route("/ajax_update", methods=["POST","GET"])
 def ajax_update():
     if request.method == 'POST':
-        job = {
-                "title": request.form['txtTitle'],
-                "description": request.form['txtDescription'],
-                "skills": request.form['txtSkills'],
-                "location": request.form['txtLocation'],
-                "salary": request.form['txtSalary']
-            }
-        mongo.db.jobs.update_one({"_id": ObjectId(request.form['id'])}, {"$set":job})
+        if isValid("employer"):
+            job = {
+                    "title": request.form['txtTitle'],
+                    "description": request.form['txtDescription'],
+                    "skills": request.form['txtSkills'],
+                    "location": request.form['txtLocation'],
+                    "salary": request.form['txtSalary']
+                }
+            mongo.db.jobs.update_one({"_id": ObjectId(request.form['id'])}, {"$set":job})
+            jobs = mongo.db.jobs.find()
+            return "job updated successfully"
+        return render_template("error.html")
+    if isValid("employer"):
         jobs = mongo.db.jobs.find()
-        return "job updated successfully"
-    jobs = mongo.db.jobs.find()
-    return render_template("employer/jobs.html", jobs=jobs)
+        return render_template("employer/jobs.html", jobs=jobs)
+    return render_template("error.html")
 
 
 @app.route("/ajax_delete", methods=["POST", "GET"])
 def ajax_delete():
     if request.method == 'POST':
-        mongo.db.jobs.delete_one({"_id": ObjectId(request.form['id'])})
-        return "Deleted Successfully"
-    jobs = mongo.db.jobs.find()
-    return render_template("employer/jobs.html", jobs=jobs)
+        if isValid("employer"):
+            mongo.db.jobs.delete_one({"_id": ObjectId(request.form['id'])})
+            return "Deleted Successfully"
+        return render_template("error.html")
+    if isValid("employer"):
+        jobs = mongo.db.jobs.find()
+        return render_template("employer/jobs.html", jobs=jobs)
+    return render_template("error.html")
+
+
+def isValid(role):
+    if "user" in session:
+        if session["role"] == role:
+            return True
+        return False
+    return False
 
 
 if __name__ == "__main__":
@@ -309,3 +340,4 @@ if __name__ == "__main__":
             port=int(os.environ.get("PORT")),
             debug=True
             )
+    app.register_error_handler(404, page_not_found)
