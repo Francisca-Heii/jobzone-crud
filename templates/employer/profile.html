@@ -3,9 +3,7 @@
 <div class="row">
     <div class="card" style="height: 500px;margin-left: 18rem;margin-right: 18rem;margin-top: 6rem;">
         <div class="card-content">
-
             <span class="card-title activator grey-text text-darken-4" style="text-align:center!important">
-
                 <i class="fas fa-pencil right"></i></span>
             <div class="row">
                 <div class="input-field col s12" style="text-align: center;">
@@ -59,7 +57,6 @@
                         {% else %}
                         <i>designation</i>
                         {% endif %}
-
                     </label>
                 </div>
                 <div class="input-field col s6">
@@ -68,7 +65,6 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-
                     <label for="firstname">About Company:&nbsp;
                         {% if profile.companydesc %}
                         <span>{{ profile.companydesc}}</span>
@@ -84,12 +80,9 @@
                     </label>
                 </div>
             </div>
-
-            <!-- <p><a href="#">This is a link</a></p> -->
         </div>
         <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Edit Profile<i class="fas fa-close right"></i></span>
-            <!-- <p>Here is some more information about this product that is only revealed once clicked on.</p> -->
             <div class="row">
                 <div class="file-field input-field" style="text-align: center;">
                     <img class="profile-image" src="{{profile.imageurl}}"
@@ -97,21 +90,10 @@
                 </div>
                 <form class="col s12 m12" method="POST" action="{{url_for('profile',username=session['user'])}}"
                     enctype="multipart/form-data">
-                    <!-- <div class="card-panel"> -->
                     <div class="row">
-                        <!-- <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Select Image</span>
-                                <input type="file" name="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div> -->
-                         <div class="input-field col s12">
-                        <i class="fas fa-file-image prefix light-blue-text text-darken-4"></i>
-                            <input id="file" name="file" type="text" class="validate"
-                                value="{{profile.file}}">
+                        <div class="input-field col s12">
+                            <i class="fas fa-file-image prefix light-blue-text text-darken-4"></i>
+                            <input id="file" name="file" type="text" class="validate" value="{{profile.file}}">
                             <label for="file">Image File Url</label>
                         </div>
                     </div>
@@ -132,13 +114,14 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="fas fa-building prefix light-blue-text text-darken-4"></i>
-                            <input id="company" name="company" type="text" class="validate" value="{{profile.company}}" required>
+                            <input id="company" name="company" type="text" class="validate" value="{{profile.company}}"
+                                required>
                             <label for="company">Company name</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="fas fa-building prefix light-blue-text text-darken-4"></i>
-                            <textarea id="companydesc" name="companydesc"
-                                class="validate materialize-textarea" required>{{profile.companydesc}}</textarea>
+                            <textarea id="companydesc" name="companydesc" class="validate materialize-textarea"
+                                required>{{profile.companydesc}}</textarea>
                             <label for="companydesc">Company description</label>
                         </div>
                     </div>
@@ -153,14 +136,16 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="fas fa-address-card prefix light-blue-text text-darken-4"></i>
-                            <input id="address" name="address" type="text" class="validate" value="{{profile.address}}" required>
+                            <input id="address" name="address" type="text" class="validate" value="{{profile.address}}"
+                                required>
                             <label for="address">Address</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
-                            <input id="phone" name="phone" type="text" class="validate" value="{{profile.phone}}" required>
+                            <input id="phone" name="phone" type="text" class="validate" value="{{profile.phone}}"
+                                required>
                             <label for="phone">Phone</label>
                         </div>
                     </div>
@@ -170,11 +155,9 @@
                             Update Profile <i class="fas fa-sign-in-alt"></i>
                         </button>
                     </div>
-                    <!-- </div> -->
                 </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

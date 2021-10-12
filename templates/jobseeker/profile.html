@@ -54,7 +54,7 @@
                 <div class="input-field col s12">
                     <label for="resume">Resume :&nbsp;
                         {% if profile.resumeurl %}
-                        <span><a target="_blank" href="{{profile.resumeurl}}">{{profile.resumeurl}}</a></span>
+                        <span><a target="_blank" href="{{profile.resumeurl}}">View uploaded resume</a></span>
                         {% else %}
                         <i>no resume added..</i>
                         {% endif %}
@@ -79,12 +79,9 @@
                     </label>
                 </div>
             </div>
-
-            <!-- <p><a href="#">This is a link</a></p> -->
         </div>
         <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Edit Profile<i class="fas fa-close right"></i></span>
-            <!-- <p>Here is some more information about this product that is only revealed once clicked on.</p> -->
             <div class="row">
                 <div class="file-field input-field" style="text-align: center;">
                     <img class="profile-image" src="{{profile.imageurl}}"
@@ -92,17 +89,7 @@
                 </div>
                 <form class="col s12 m12" method="POST"
                     action="{{url_for('jobSeekerProfile',username=session['user'])}}" enctype="multipart/form-data">
-                    <!-- <div class="card-panel"> -->
                     <div class="row">
-                        <!-- <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Select Image</span>
-                                <input type="file" name="imageFile">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div> -->
                         <div class="input-field col s12">
                             <i class="fas fa-file-image prefix light-blue-text text-darken-4"></i>
                             <input id="imageFile" name="imageFile" type="text" class="validate"
@@ -172,6 +159,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

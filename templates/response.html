@@ -6,7 +6,8 @@
             $.post("/applyJob", {
                 id: id
             }, function (data) {
-                $(THIS).closest("div").next().find("label").html(data); // $(this).next()[0].html(data)
+                $(THIS).closest("div").next().find("label").html(
+                    data); // $(this).next()[0].html(data)
             });
         });
     });
@@ -53,7 +54,5 @@
                 </div>
             </div>
         </div>
-
-    </div>
     </div>
     {% endfor %}

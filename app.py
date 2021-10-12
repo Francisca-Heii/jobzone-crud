@@ -1,9 +1,8 @@
 import os
 from flask import (Flask, flash, render_template,
- redirect, request, session, url_for, jsonify)
+                    redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-#from werkzeug.utils  import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
@@ -23,6 +22,7 @@ mongo = PyMongo(app)
 def page_not_found(e):
     return render_template("error.html")
 
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -33,16 +33,14 @@ def home():
 def employerHome():
     if isValid("employer"):
         return render_template("employer/home.html")
-    else:
-        return render_template("error.html")
+    return render_template("error.html")
 
 
 @app.route("/jobSeekerHome")
 def jobSeekerHome():
     if isValid("jobseeker"):
         return render_template("jobseeker/home.html")
-    else:
-        return render_template("error.html")
+    return render_template("error.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -111,7 +109,6 @@ def login():
             #username doesn't exists
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
-
     return render_template("login.html")
 
 
@@ -152,8 +149,6 @@ def profile(username):
 
 @app.route("/jobSeekerProfile/<username>", methods=["GET", "POST"])
 def jobSeekerProfile(username):
-    user = mongo.db.users.find_one(
-            {"username": session["user"]})
     if request.method == "POST":
         profile = {
                 "username": session["user"],
@@ -173,7 +168,6 @@ def jobSeekerProfile(username):
             mongo.db.job_seeker_profile.insert_one(profile)
         profile = mongo.db.job_seeker_profile.find_one(
                     {"username": session["user"]})
-        # profile["email"] = user["email"]
         flash("Profile updated successfully")
         return render_template(
             "jobseeker/profile.html", profile=profile)
@@ -192,7 +186,6 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     session.pop("role")
-    #session.pop("profile")
     return redirect(url_for("login"))
 
 
@@ -209,11 +202,11 @@ def postJob():
                     "skills": request.form.get("skills"),
                     "location": request.form.get("location"),
                     "salary": request.form.get("salary"),
+                    "currency": request.form.get("currency"),
                     "company": profile["company"]
                 }
             mongo.db.jobs.insert_one(job)
             flash("New Job created successfully")
-            # mongo.db.employer_profile.insert_one(profile)
             savedJob = mongo.db.jobs.find_one(
                         {"username": session["user"]})
             return render_template(
@@ -238,36 +231,38 @@ def search(keywords):
         return render_template("searchJobs.html")
     elif keywords == '1':
         jobs = mongo.db.jobs.find()
-        numrows=jobs.count()
-        return jsonify({'htmlresponse': render_template('response.html', jobs=jobs, numrows=numrows)})
+        numrows = jobs.count()
+        return jsonify({'htmlresponse': render_template(
+                            'response.html', jobs=jobs, numrows=numrows)})
     else:
         keywordArray = keywords.strip().split(",")
         jobs = mongo.db.jobs.find(
-            {"$or":[
-                    {"title": {"$in": keywordArray}},
-                    {"skills": {"$in": keywordArray}},
-                    {"company":{"$in": keywordArray}},
-                    {"location":{"$in": keywordArray}}
-                ]}
+            {"$or": [
+                        {"title": {"$in": keywordArray}},
+                        {"skills": {"$in": keywordArray}},
+                        {"company": {"$in": keywordArray}},
+                        {"location": {"$in": keywordArray}}
+                    ]}
         )
-        numrows=jobs.count()
-        return jsonify({'htmlresponse': render_template('response.html', jobs=jobs, numrows=numrows)})
+        numrows = jobs.count()
+        return jsonify({'htmlresponse': render_template(
+                        'response.html', jobs=jobs, numrows=numrows)})
     return render_template("searchJobs.html")
 
 
 @app.route("/applyJob", methods=["POST", "GET"])
 def applyJob():
     if request.method == 'POST':
-        jobApplied = {
+        job_applied = {
                 "jobId": ObjectId(request.form['id']),
                 "username": session["user"]
             }
-        existingApplication = mongo.db.jobs_history.find_one(
+        existing_application = mongo.db.jobs_history.find_one(
             {"jobId": ObjectId(request.form['id']), "username": session["user"]})
-        if existingApplication:
+        if existing_application:
             return "Job Already Applied"
         else:
-            mongo.db.jobs_history.insert(jobApplied)
+            mongo.db.jobs_history.insert(job_applied)
             return "Job Applied Successfully"
     jobs = mongo.db.jobs.find()
     return render_template("employer/jobs.html", jobs=jobs)
@@ -293,7 +288,7 @@ def jobApplicants():
         return render_template("error.html")
 
 
-@app.route("/ajax_update", methods=["POST","GET"])
+@app.route("/ajax_update", methods=["POST", "GET"])
 def ajax_update():
     if request.method == 'POST':
         if isValid("employer"):
@@ -327,6 +322,7 @@ def ajax_delete():
     return render_template("error.html")
 
 
+# checks the role
 def isValid(role):
     if "user" in session:
         if session["role"] == role:
@@ -335,9 +331,12 @@ def isValid(role):
     return False
 
 
+# configure and start server
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True
             )
+    # register 404 error handler
     app.register_error_handler(404, page_not_found)
+

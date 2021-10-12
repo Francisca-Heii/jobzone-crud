@@ -85,3 +85,6 @@ a {
 .navbarFont{
    font-weight: bold
 }
+select{
+    display: block!important;
+}

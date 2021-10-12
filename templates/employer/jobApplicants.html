@@ -24,7 +24,6 @@
                         <th>Download Resume</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {% for row in applicantsDetails %}
                     <tr>
@@ -35,11 +34,11 @@
                         <td>{{row.phone}}</td>
                         <td>{{row.address}}</td>
                         <td>
-                            <a class="resume" target="_blank" title="Download Resume" href="{{row.resumeurl}}" id="{{row._id}}">Download Resume </a>
+                            <a class="resume" target="_blank" title="Download Resume" href="{{row.resumeurl}}"
+                                id="{{row._id}}">Download Resume </a>
                         </td>
                     </tr>
                     {% endfor %}
-
                 </tbody>
             </table>
         </div>

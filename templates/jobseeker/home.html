@@ -1,32 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 <h3 class="center-align">Job Seeker Dashboard</h3>
-
-
-    <div class="row">
-        <div class="col s6 m6">
-          <div class="card jobsearch-div">
-            <div class="card-content black-text">
-              <span class="card-title">View and Edit profile</span>
-              <p>Goto Profile section, view it and update it</p>
-            </div>
-            <div class="card-action">
-                <a href="{{ url_for('jobSeekerProfile', username=session['user'])}}">BROWSE</a>
-            </div>
-          </div>
-        </div>
-        <div class="col s6 m6">
-            <div class="card jobsearch-div">
-              <div class="card-content black-text">
-                <span class="card-title">Search and Apply Jobs</span>
-                <p>Goto Search Jobs section and find jobs and apply them</p>
-              </div>
-              <div class="card-action">
-                  <a href="{{ url_for('search', keywords = '0')}}">BROWSE </a>
-              </div>
-            </div>
-          </div>
+<div class="row">
+  <div class="col s6 m6">
+    <div class="card jobsearch-div">
+      <div class="card-content black-text">
+        <span class="card-title">View and Edit profile</span>
+        <p>Goto Profile section, view it and update it</p>
       </div>
-      
-
+      <div class="card-action">
+        <a href="{{ url_for('jobSeekerProfile', username=session['user'])}}">BROWSE</a>
+      </div>
+    </div>
+  </div>
+  <div class="col s6 m6">
+    <div class="card jobsearch-div">
+      <div class="card-content black-text">
+        <span class="card-title">Search and Apply Jobs</span>
+        <p>Goto Search Jobs section and find jobs and apply them</p>
+      </div>
+      <div class="card-action">
+        <a href="{{ url_for('search', keywords = '0')}}">BROWSE </a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

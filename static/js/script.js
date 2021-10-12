@@ -1,9 +1,7 @@
 $(document).ready(function () {
 
-  //$("li").addClass("active")
   $("li").click(function () {
     if (!$(this).hasClass("active")) {
-      // var c = "login"
       $("li.active").removeClass("active")
       $(this).addClass("active")
     }
