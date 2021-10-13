@@ -22,33 +22,41 @@ The application has a Registration and Login system to show clear seperation bet
 The goal is to help both organizations and job seekers to connect and grow together. To help
  employers speed up their hiring process. It would be easier for hiring managers to check job applications online than manually scan printed resumes. The site give employers access to a list of candidates with the required skills, achievements, and experience to select from. This helps them save time, effort and is cost effective for both the employer and jobseekers.
 
-### User Stories
-_Generic (Guest/Public) User:_
-* As a generic user I want to visit a Job portal site  to look for job opportunities  or  potential candidates.
-* As a generic user I want to be able to access the website on any device whether small or big.
-* As a generic user I want to be met with visually appealing, intuitive and easy to read layouts.
-* As a Generic User, I want to view the job dashboard.
-* As a Generic User, I want to have the Search functionality on dashboard.
-* As a Generic User, I want to see job Search results and job’s description only. 
-* As a Generic User, I want to be able to register/sign-up to create and track my own activities.
-* As a Generic User, I want to be able to contact someone in the event something is wrong with the application.
+### *User Stories*
+_First Time Visitor:_
+* As a first time visitor, I want the main purpose of the site to be clear so that I immediately know what the site is intended for upon entering.
+* As a first time vistor, I want to visit a job portal website so that I can search for job opportunities or for job seekers.
+*  As a first time vistor, I want the site to be responsive so that I can easily view the webpages from my mobile, tablet or desktop device.
+* As a first time vistor, I want to see the menu bar so that I can easily navigate the website.
+* As a first time vistor, I want to be met with visually appealing, intuitive and easy to read layouts.
+*  As a first time vistor, I want to see how I can get started or register to the website so that I can view any job openings, create and track my own activities.
+* As a first time vistor I want to see how I can get started or register to the website so that I can view job seekers 's profile and contact them for interview if I need to.
+* As a first time vistor I want to see the social media links so that I can connect with JobZone.
 
 _Registered (Job Seeker) User:_
-* As a Registered User, I want to be able to log into my account and view my data at anytime.
-* As a Registered User, I want to create and update my profile.
-* As a Registered User I want to be able to delete any information if I no longer need it.
-* As a Registered User, I want to search jobs and see the description of job and apply if I have the matching requirements.
-* As a Registered User, I want to be able to log out of my account.
-* As a Registered User, I want to have a method of contacting someone in the event something is not functioning as expected in the application.
+
+All the user stories mentioned in the first time vistor to the site, also applies to the registered users (Job Seeker). Below I have listed additional user stories for a Job Seeker.
+
+* As a Job Seeker, I want to find out how I can login to my account so that I can view my profile anytime.
+* As a Job Seeker, I want to be able to create and update my profile so that I keep it up to date.
+* As a Job Seeker, I want to be able to upload my profile picture and resume so that the employer can know more about myself.
+* As a Job Seeker, I want to be able to  search jobs so that I can see all the job openings.
+* As a Job Seeker, I want to be able to filter job posts using the key words so that I can know which job do I qualify for and apply for.
+* As a Job Seeker, I want to be able to see a flash message, when I have created or updated my profile and also a notification when I have applied for a job successfully.
+* As a Job Seeker I want to see the Job Dashbord so that I can view, edit my profile or have the search functionality.
+* As a  Job Seeker, I want to be able to log out of my account.
 
 _Registered (Employer) User:_
-* As a Registered User, I want to be able to log into my account.
-* As a Registered User, I want to create Company profile and edit at anytime.
-* As a Registered User, I want to post the job.
-* As a Registered User, I want to be able to Activate and Deactivate jobs.
-* As a Registered User, I want to see all applicants that have applied for a particular job posting.
-* As a Registered User, I want to be able to log out of my account.
-* As  Registered User, I want to have a method of contacting someone in the event something is not functioning as expected in the application.
+
+All the user stories mentioned in the first time vistor to the site, also applies to the registered users (Employer). Below I have listed additional user stories for the Employer.
+
+* As an Employer, I want to find out how I can login to my account so that I can view the Comapny profile anytime.
+* As an Employer, I want to be able to create a Company profile and edit at anytime, so that I keep it up to date.
+* As an Employer, I want to be able to post jobs so that I can attract new talent.
+* As an Employer, I want to be able to manage jobs, so that I can update, activate or deactivate jobs.
+* As an Employer, I want see all applicants who have applied for a particular job posting so that I can shortlist them.
+* As an Employer, I want to be able to download candidates resume so that I can have them ready for interview.
+* As an Emplyer, I want to be able to log out of my account.
 
 _Developer:_
 * As a Developer, I want to expand my knowledge with Python and Flask by creating an extensive management database application.
@@ -66,11 +74,25 @@ All the wirframes are designed to display on different screen sizes, laptop/comp
 #### *Color Scheme*
 * The colors used throughout the website are:
 
-The navigation bar and the icons used on profile pages has a blue rgb (0,64,153) color with a gradient  dark blue background on menu items.
-The home page contains a blue banner with a rainbow parachuete and white clouds. A rgb(9,148,218) color with hoover effect is used on the buttons. #F5F5F5 is used as a background color. A #b3e5fc is applied on flash messages. A grey color is used on the table for search jobs to make the the jo search stand out.
+RGB (0,64,153): This dark blue color is used on the navigation bar and the icons used on profile pages has a blue with a gradient  dark blue background on menu items.
+
+RGB (9,148,218): This greenish color is used as a background color for the buttons, it has a very light green color on hoovering the button. 
+
+#F5F5F5: This whitesmoke color is used as a background  color of the body. 
+ 
+A #b3e5fc is applied on flash messages.
+  
+A grey color is used on the table for search jobs to make the the jo search stand out.
+
+### *Imagery*
+The home page contains a blue banner with a rainbow parachuete and white clouds.
+
 
 #### *Typography*
 The project uses Open Sans font on its own through out the site. "Montserrat" is used as a fallback font, in cases where Open Sans for some reasons fails to load. This means Montserrat will load in order to back up the failed font. I like the Open Sans font as I find it elegant, sophisticated, yet modern. It is beautifully legible and offers an excllenexcellent reading experience. 
+
+#### *icons*
+
 
 #### *Logo*
 
