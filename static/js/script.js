@@ -1,13 +1,13 @@
 $(document).ready(function () {
- 
+
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').parent().addClass('active');
 
   $('.sidenav').sidenav({
     edge: "right"
   });
   $(".update").hide();
-  $("tr td:nth-child(1)").hide()
-  $("#jobIdHeader").css("display", "none")
+  $("tr td:nth-child(1)").hide();
+  $("#jobIdHeader").css("display", "none");
   $(".edit").click(function () {
     $(this).attr("disabled", "disabled")
     $(this).parents("tr").find("td:not(:last-child)").each(function (i) {
@@ -22,12 +22,12 @@ $(document).ready(function () {
       } else if (i == '5') {
         var idname = 'txtLocation';
       }
-      $(this).html("<input type='text' name='updaterec' id='" + idname + "' class='input-field' value='" + $(this).text() + "'> ")
-    })
+      $(this).html("<input type='text' name='updaterec' id='" + idname + "' class='input-field' value='" + $(this).text() + "'> ");
+    });
     $(this).parents('tr').find('.update').show();
     $(this).hide();
     $(this).parents('tr').find('.delete').removeClass('delete').addClass("update");
-  })
+  });
 
 
   $(".update").click(function () {
@@ -49,14 +49,14 @@ $(document).ready(function () {
       $("#displayMessage").show();
       setTimeout(function () {
         location.reload();
-      }, 1000)
+      }, 1000);
 
     });
   });
 
 
   $(document).on("click", ".delete", function () {
-    var id = $(this).parents('tr').find('td:nth-child(1)')[0].innerHTML
+    var id = $(this).parents('tr').find('td:nth-child(1)')[0].innerHTML;
     $(this).parents("tr").remove();
     $.post("/ajax_delete", {
       id: id
