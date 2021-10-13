@@ -70,6 +70,11 @@ All the wirframes are designed to display on different screen sizes, laptop/comp
 * [Desktop](wireframes/wireframes_desktop.pdf)
 
 ### *DESIGN*
+* I decided to keep the design of the application minimalistic and clean.
+* Each page contains relevant contenet to communicate to the user rather than to overwhelm them with unneccessary information.
+* Links and buttons have a hover effect.
+* I decided to use cards and tables to keep information clear and easy to read
+* Used a background color to add a pop on firing flash messages
 
 #### *Color Scheme*
 * The colors used throughout the website are:
@@ -84,22 +89,61 @@ A #b3e5fc is applied on flash messages.
   
 A grey color is used on the table for search jobs to make the the jo search stand out.
 
+#### *Typography* 
+ The main font used is <a href="https://fonts.google.com/specimen/Open+Sans?category=Sans+Serif">Open Sans</a>. I decided to use this font in the entire application due to its elegant, sophisticated, yet modern. It is beautifully legible and offers an excellent reading experience, which I thought it would be a perfect font for a job portal app.
+
+<a href="https://fonts.google.com/specimen/Montserrat?category=Sans+Serif">Montserrat</a> is used as a fallback font, in cases where Open Sans for some reasons have difficulty loading or fails to load altogether, This is where Montserrat takes over and load in the browser to back up the failed font.
+ 
 ### *Imagery*
-The home page contains a blue banner with a rainbow parachuete and white clouds.
-
-
-#### *Typography*
-The project uses Open Sans font on its own through out the site. "Montserrat" is used as a fallback font, in cases where Open Sans for some reasons fails to load. This means Montserrat will load in order to back up the failed font. I like the Open Sans font as I find it elegant, sophisticated, yet modern. It is beautifully legible and offers an excllenexcellent reading experience. 
-
-#### *icons*
-
-
+* The banner image on landing page is from <a href="https://www.pexels.com/photo/hot-air-balloon-photo-597054/">Pixels</a>
+* Icons are from <a href="https://fontawesome.com/v4.7/icons/">Font Awesome</a>
 #### *Logo*
+<a href="https://looka.com/">Logo</a> was created .....
+
 
 
 ## *FEATURES*
-#### Existing Features
+#### *Existing Features*
 
 
-#### Features Left To Implement
+
+
+#### *Features left to implement in feature*
+
+
+
+
+## *Technology Used*
+
+#### *Frameworks, Editors & Version Control*:
+* <a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a> ~ Used .....
+*  <a href="https://en.wikipedia.org/wiki/CSS">CSS3</a> ~ Used .....
+* <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> ~ Used .....
+*  <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> ~ Used .....
+*  <a href="https://jquery.com/">JQuery</a> ~ Used .....
+*  <a href="https://materializecss.com/">Materializecss</a> ~ Used .....
+*  <a href="https://www.gitpod.io/">Gitpod</a> ~ Used .....
+*  <a href="https://github.com/">GitHub</a> ~ Used .....
+*  <a href="https://www.heroku.com/">Heroku</a> ~ Used .....
+*  <a href="https://fonts.google.com/">Google Fonts</a> ~ Used .....
+*  <a href="https://git-scm.com/">Git</a> ~ Used .....
+*  <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> ~ Used .....
+*  <a href="https://jinja.palletsprojects.com/en/2.11.x/">Jinja</a> ~ Used .....
+*  <a href="https://werkzeug.palletsprojects.com/en/1.0.x/">Werkzeug</a> ~ Used .....
+*  <a href="https://developer.chrome.com/docs/devtools/open/">Chrome DevTools</a> ~ Used .....
+*  <a href="https://validator.w3.org/">W3C Markup Validation Service </a> ~ Used .....
+*  <a href="https://jigsaw.w3.org/css-validator/">W3C CSS Validator</a> ~ Used .....
+*  <a href="https://jshint.com/">JShint</a> ~ Used .....
+*  <a href="http://pep8online.com/">PEP8</a> ~ Used .....
+*  <a href="https://git-scm.com/">Git</a> ~ Used .....
+*  <a href="https://git-scm.com/">Git</a> ~ Used .....
+*  <a href="https://git-scm.com/">Git</a> ~ Used .....
+
+#### *Tools used*
+*  <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> ~ Used .....
+*  <a href="https://www.figma.com/">Figma</a> ~ Used .....
+
+
+
+
 

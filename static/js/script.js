@@ -1,11 +1,7 @@
 $(document).ready(function () {
+ 
+  $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').parent().addClass('active');
 
-  $("li").click(function () {
-    if (!$(this).hasClass("active")) {
-      $("li.active").removeClass("active")
-      $(this).addClass("active")
-    }
-  })
   $('.sidenav').sidenav({
     edge: "right"
   });
