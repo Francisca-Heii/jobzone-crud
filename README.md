@@ -97,15 +97,15 @@ All the wirframes are designed to display on different screen sizes, laptop/comp
 <span id="mobile"></span>
 ##### MOBILE
 
-* [home](wireframes/mobile/home.PNG)
+* [home](wireframes/mobile/Homepage.PNG)
 * [register](wireframes/mobile/register.PNG)
 * [login](wireframes/mobile/login.PNG)
 * [view profile](wireframes/mobile/view-profile.PNG)
 * [update profile](wireframes/mobile/update-profile.PNG)
-* [post jobs](wireframes/mobile/post-jobs.PNG)
+* [post jobs](wireframes/mobile/post-job.PNG)
 * [manage jobs](wireframes/mobile/manage-jobs.PNG)
 * [view applicants](wireframes/mobile/view-applicants.PNG)
-* [job search](wireframes/mobile/job-search.PNG)
+* [job search](wireframes/mobile/search-jobs.PNG)
 <span id="ipad"></span>
 ##### IPAD
 
