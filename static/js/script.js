@@ -1,13 +1,19 @@
 $(document).ready(function () {
 
+  //set navbar item active
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').parent().addClass('active');
 
+  //open mobile navbar on right side
   $('.sidenav').sidenav({
     edge: "right"
   });
+  // hide the update buttonon page load
   $(".update").hide();
+  // hid the Id column
   $("tr td:nth-child(1)").hide();
+  // hide the Id header
   $("#jobIdHeader").css("display", "none");
+  // edit functionality
   $(".edit").click(function () {
     $(this).attr("disabled", "disabled")
     $(this).parents("tr").find("td:not(:last-child)").each(function (i) {
@@ -29,7 +35,7 @@ $(document).ready(function () {
     $(this).parents('tr').find('.delete').removeClass('delete').addClass("update");
   });
 
-
+  // update functionality
   $(".update").click(function () {
     var id = $(this).parents('tr').find('td:nth-child(1)').find('input')[0].defaultValue;
     var txtTitle = $("#txtTitle").val();
@@ -54,7 +60,7 @@ $(document).ready(function () {
     });
   });
 
-
+  // delete functionality
   $(document).on("click", ".delete", function () {
     var id = $(this).parents('tr').find('td:nth-child(1)')[0].innerHTML;
     $(this).parents("tr").remove();
@@ -65,7 +71,7 @@ $(document).ready(function () {
       $("#displayMessage").show();
     });
   });
-
+  // job search api  call
   function load_data(query) {
     $.ajax({
       url: "/search/" + query,
@@ -76,6 +82,7 @@ $(document).ready(function () {
       }
     });
   }
+  // job search button click
   $('#bthSearch').click(function () {
     var search = $("#search_text").val();
     if (search != '') {

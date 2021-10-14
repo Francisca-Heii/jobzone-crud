@@ -11,12 +11,12 @@ body {
     width: 80px;
 }
 
+/* Message format */
 .flashes h4 {
     line-height: 2;
 }
 
 .menu-background {
-    rgb(9, 148, 218) !important;
     background: linear-gradient(90deg, rgb(0, 116, 173) 0%, rgb(0, 64, 153) 100%);
 }
 
@@ -61,6 +61,7 @@ a {
     margin-bottom: 0px;
 }
 
+/* border for job search result box */
 .jobsearch-div {
     border: 1px solid !important;
     background-color: lightgray !important;
@@ -73,6 +74,7 @@ a {
     color: black !important;
 }
 
+/* Job search result box css */
 .jobsearch-td {
     padding-left: 6px;
     padding-top: 6px;
@@ -89,8 +91,6 @@ a {
 select {
     display: block !important;
 }
-
-element.style {}
 
 .navbarFont {
     font-weight: bold;
@@ -110,12 +110,9 @@ nav ul a {
     font-weight: bold;
 }
 
+/* Media query for profile section  */
 @media only screen and (max-width: 992px) {
     table.responsive-table tbody {
-        /* display: block;
-    width: auto;
-    position: relative;
-    overflow-x: auto; */
-        white-space: normal!important;
+        white-space: normal !important;
     }
 }

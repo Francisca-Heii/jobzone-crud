@@ -1,6 +1,6 @@
 import os
 from flask import (Flask, flash, render_template,
-                    redirect, request, session, url_for, jsonify)
+                redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -335,7 +335,7 @@ def isValid(role):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True
+            debug=False
             )
     # register 404 error handler
     app.register_error_handler(404, page_not_found)
