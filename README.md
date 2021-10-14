@@ -1,7 +1,10 @@
 # *JobZone*
+
+![alt text](static/images/responsive.png)
+
 JobZone is a website that aims to play a role in bridging the gap between the recruiters and the job seekers. The key targeted user is the recruiter and the job seeker. Recruiters can advertise their job vacancies to job seekers,look for a right candidate who has the right qualification to handle the responsibilities efficiently. On the other hand, job seekers can search/find a job where they can apply their skills and knowledge to grow their professional career.
-Job
-***
+
+View the live application: [here](https://job-zone-project.herokuapp.com/)
 
 ## *Table of contents*
 * [What does it do and what does it need to fulfill?](#what-does-it-do-and-what-does-it-need-to-fullfil)
@@ -98,50 +101,147 @@ A grey color is used on the table for search jobs to make the the jo search stan
 * The banner image on landing page is from <a href="https://www.pexels.com/photo/hot-air-balloon-photo-597054/">Pixels</a>
 * Icons are from <a href="https://fontawesome.com/v4.7/icons/">Font Awesome</a>
 #### *Logo*
-<a href="https://looka.com/">Logo</a> was created .....
+<a href="https://looka.com/">Logo</a> The logo 
 
+#### *Interactive design*
+* The website has to be easy to navigate.
+* The user can easily find the information he/she wants to find.
 
+![alt text](static/images/sitemap.PNG)
+
+#### *Information architecture*
+* The project has five collections in the database. The database structure in MongoDB is as follows:
+
+![alt text](static/images/information-hierarchy.PNG)
 
 ## *FEATURES*
+
 #### *Existing Features*
+* The project boasts several key features:
 
+**Create:** Several instances of create functionality as per CRUD through 
+        - The Registration form, creating a new user in the database.
+        - The Job seeker profile, creating page that saves the data in the database.
+        - The Manage Jobs section for employer, user can view edit or update pre-existing job.
 
+**Read:** Is implemented throughout the site from job search to view applicants.
+        - The job seeker search functionality directly read the data from the database and filter it.
+        - The Job seeker view, Profile section that loads data from database.
+        - The Employer view, Profile section that loads data from database.
+        - The Employer view, applicant page that read data from the database.
 
+**Update:** Present for a logged in user ~
+        - The job seeker profile, updating page that update the data in the database.
+        - The Employer, update profile page that update the existing data in database.
+        - The Manage Jobs section employer can update current posted jobs.
 
+**Delete:** Present for a logged in user ~ 
+        - An employer can delete a Job/jobs which vacancies have been filled. 
+
+* Authentication and authorization functionality to make the application secure. 
+* Perfect error handing for unknown and restricted routes.
+* Responsive Design that enhance the user experience on big screens(desktop) and small screens(tablet or mobile phones). 
+* Custom themed and styled browser scrollbar.
+* Responsive menu that is easy to adjust on screen with any resolution. 
+* Dashboard for the job seeker and that display different sections of his profile and some statistics.                           
+    
 #### *Features left to implement in feature*
-
-
-
+* Job application tracking feature that helps job seeker and employer both to see the current status of job application.
+* Advance search functionality that gives more accurate result to the job seeker.
+* Dashboard for employer that show some graphical representation.
+* Reporting functionality for employer.
+* Account settings for job seeker to manage active/ inactive his availability and block the companies.
+* Admin login that manage the roles and create different fields or lists so that it can be used throughout the application by job seeker and employer.
 
 ## *Technology Used*
 
 #### *Frameworks, Editors & Version Control*:
-* <a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a> ~ Used .....
-*  <a href="https://en.wikipedia.org/wiki/CSS">CSS3</a> ~ Used .....
-* <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> ~ Used .....
-*  <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> ~ Used .....
-*  <a href="https://jquery.com/">JQuery</a> ~ Used .....
-*  <a href="https://materializecss.com/">Materializecss</a> ~ Used .....
-*  <a href="https://www.gitpod.io/">Gitpod</a> ~ Used .....
-*  <a href="https://github.com/">GitHub</a> ~ Used .....
-*  <a href="https://www.heroku.com/">Heroku</a> ~ Used .....
-*  <a href="https://fonts.google.com/">Google Fonts</a> ~ Used .....
-*  <a href="https://git-scm.com/">Git</a> ~ Used .....
-*  <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> ~ Used .....
-*  <a href="https://jinja.palletsprojects.com/en/2.11.x/">Jinja</a> ~ Used .....
-*  <a href="https://werkzeug.palletsprojects.com/en/1.0.x/">Werkzeug</a> ~ Used .....
-*  <a href="https://developer.chrome.com/docs/devtools/open/">Chrome DevTools</a> ~ Used .....
-*  <a href="https://validator.w3.org/">W3C Markup Validation Service </a> ~ Used .....
-*  <a href="https://jigsaw.w3.org/css-validator/">W3C CSS Validator</a> ~ Used .....
-*  <a href="https://jshint.com/">JShint</a> ~ Used .....
-*  <a href="http://pep8online.com/">PEP8</a> ~ Used .....
-*  <a href="https://git-scm.com/">Git</a> ~ Used .....
-*  <a href="https://git-scm.com/">Git</a> ~ Used .....
-*  <a href="https://git-scm.com/">Git</a> ~ Used .....
+* <a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a> ~ Used for structuring the website.
+* <a href="https://en.wikipedia.org/wiki/CSS">CSS3</a> ~ Used to write custom style for the HTML code.
+* <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> ~ Used for interactivity on the website.
+* <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> ~ Used for backed logic.
+* <a href="https://jquery.com/">JQuery</a> ~ Used as a JavaScript library
+* <a href="https://materializecss.com/">Materializecss</a> ~ Used .....
+* <a href="https://www.gitpod.io/">Gitpod</a> ~ Is the code editor used to develop, commit & push this project to Github.
+* <a href="https://github.com/">GitHub</a> ~ Used to host the repository of all previous versions of the build and linked to Heroku to push the latest changes to the deployed build version held there.
+* <a href="https://www.heroku.com/">Heroku</a> ~ A cloud platform as a service enabling deployment for this CRUD application.
+* <a href="https://fonts.google.com/">Google Fonts</a> ~ Used as a font resource.
+* <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> ~ Used as a microframework for Python
+* <a href="https://jinja.palletsprojects.com/en/2.11.x/">Jinja</a> ~ Used .....
+* <a href="https://werkzeug.palletsprojects.com/en/1.0.x/">Werkzeug</a> ~ Used .....
 
 #### *Tools used*
-*  <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> ~ Used .....
-*  <a href="https://www.figma.com/">Figma</a> ~ Used .....
+* <a href="https://validator.w3.org/">W3C Markup Validation Service </a> ~ Used to check validity of HTML code.
+* <a href="https://jigsaw.w3.org/css-validator/">W3C CSS Validator</a> ~ Used to check validity of CSS code.
+* <a href="https://jshint.com/">JShint</a> ~ Used to check the quality of the Javascript code.
+* <a href="https://developer.chrome.com/docs/devtools/open/">Chrome DevTools</a> ~ Used for debugging jquery code, checking responsiveness of application and validating api calls.
+* <a href="http://pep8online.com/">PEP8</a> ~ Used to check Python code for PEP8 requirements. requirements.
+* <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> ~ Non-relational database hosting service used.
+* <a href="https://www.figma.com/">Figma</a> ~ Used for creating wireframes.
+* <a href="https://realfavicongenerator.net/">Favicon Generator</a> ~ Used to create favicon from custom Logo I created for the project.
+* <a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2">Font Awesome Icons</a> ~ For social icons used in Footer.
+* <a href="https://websitemockupgenerator.com/">Website Mockup Generator</a> ~ Used to test responsiveness all kind of devices.
+
+### *Deployment*
+
+#### *Requirements*
+* Python3
+* Github account
+* MongoDB account
+* Heroku account
+
+#### *Clone the project*
+To make a local clone, follow the following steps.
+1. Log in to GitHub and go to the repository.
+2. Click on the green button with the text “Code”.
+3. Click on “Open with GitHub Desktop” and follow the prompts in the GitHub Desktop Application or follow the instructions from <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">GitHub Docs</a> to see how to clone the repository in other ways.
+
+#### *Working with the local copy*
+1. Install all the requirements: Go to the workspace of your local copy. In the terminal window of your IDE type: **pip3 install -r requirements.txt.**
+2. Create a database in MongoDB
+    * Signup or login to your MongoDB account.
+    * Create a cluster and a database.
+    * Create five collections in the db: employer_profile, job_seeker_profile, jobs, jobs_history, users.
+    * Add string values for the collections. See my **Information architecture** how the database is set up for this project.
+3. Create the environment variables 
+    * Create a .gitignore file in the root directory of the project.
+    * Add the env.py file in the .gitignore.
+    * Create the file env.py. This will contain all the envornment variables. 
+    ![alt text](static/images/env.png)
+4. Run the app: Open your terminal window in your IDE. Type python3 app.py and run the app.
+
+#### *Heroku Deployment*
+1. Set up local workspace for Heroku 
+    * In terminal window of your IDE type: **pip3 freeze -- local > requirements.txt.** (The file is needed for Heroku to know which filed to install.)
+    * In termial window of your IDE type: python app.py > Procfile (The file is needed for Heroku to know which file is needed as entry point.)
+
+2. Set up Heroku: create a Heroku account and create a new app and select your region.
+3. Deployment method 'Github' 
+    * Click on the **Connect to GitHub** section in the deploy tab in Heroku. 
+        - Search your repository to connect with it.
+        - When your repository appears click on **connect** to connect your repository with the Heroku.    
+    * Go to the settings app in Heroku and go to **Config Vars.** Click on **Reveal Config Vars.**
+        - Enter the variables contained in your env.py file. it is about: **IP, PORT, SECRET_KEY, MONGO_URI, MONGO_DBNAME** 
+4. Push the requirements.txt and Procfile to repository~ *git add*, *commit message* and *push* to the to repository.
+5. Automatic deployment: Go to the deploy tab in Heroku and scroll down to **Aotmatic deployments.** Click on **Enable Automatic Deploys.** By **Manual deploy** click on **Deploy Branch.**
+
+Heroku will receive the code from Github and host the app using the required packages. Click on **Open app** in the right corner of your Heroku account. The app wil open and the live link is available from the address bar.
+
+### *Credits*
+* The text in the website is my own.
+
+#### *Images*
+* Landing page banner image source <a href="https://www.pexels.com/photo/hot-air-balloon-photo-597054/">Pixels</a> 
+
+#### *code*
+
+
+
+#### *Special Thanks & Acknowledgements*
+A thank you to my friends and family for testing the Application for me. Also a thank you to my mentor for the help and support, those in Slack and Tutor Support especially Alan for his tremendous support.
+
+
+
 
 
 
